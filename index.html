@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideas</title>
+    <link rel="stylesheet" href="bulma.min.css">
+</head>
+<body>
+    <div id="app" >
+      <section class="hero">
+        <div class="hero-body">
+          <p class="title">
+            Mis ideas
+          </p>
+          <p class="subtitle">
+            Proyecto Vuejs basico
+          </p>
+        </div>
+      </section>
+      <div class="columns">
+        <div class="column">
+          <section class="hero">
+            <div class="hero-body">
+          
+              <p class="subtitle">
+                Registrar ideas
+              </p>
+              <div class="field">
+                <label class="label">Idea</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Ingrese la idea" v-model="idea_txt">
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Prioridad</label>
+                <div class="control">
+                  <div class="select">
+                    <select v-model="prioridad">
+                      <option value="N">Normal</option>
+                      <option value="I">Importante</option>
+                      <option value="M">Muy Importante</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <button @click="AgregarIdea();" class="button is-success">Agregar</button>
+              
+            </div>
+          </section>
+        </div>
+        <div class="column">
+          <section class="hero">
+            <div class="hero-body">
+          
+              <p class="subtitle">
+                Lista de ideas
+              </p>
+              <div class="field">
+                
+                <div class="control">
+                  <input class="input" type="text" placeholder="Buscar ideas" v-model="search_text">
+                </div>
+              </div>
+            </div>
+            <table class="table">
+              <thead>
+                <th>Idea</th>
+                <th>Prioridad</th>
+                <th>Acciones</th>
+              </thead>
+              <tbody>
+                <tr v-for="i in lista_ideas">
+                  <td>{{ i.idea }}</td>
+                  <td v-if="i.prioridad === 'N'"><span class="tag is-info">Normal</span></td>
+                  <td v-else-if="i.prioridad === 'I'"><span class="tag is-warning">Importante</span></td>
+                  <td v-else="i.prioridad === 'M'"><span class="tag is-danger">Importante</span></td>
+                  <td><button @click="EliminarIdea(i.id)"class="button is-danger">Eliminar</button></td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </section>
+        </div>
+        
+      </div>
+
+      <section class="hero">
+        <div class="hero-body">
+          <p class="title">
+            Mis ideas desde un servidor
+          </p>
+          <p class="subtitle">
+            <button @click="CargarDatosServidor();" class="button is-success">Agregar</button>
+          </p>
+          <table class="table">
+            <thead>
+              <th>Idea</th>
+              <th>Prioridad</th>
+              <th>Acciones</th>
+            </thead>
+            <tbody>
+              <tr v-for="i in ideas_servidor">
+                <td>{{ i.updated }}</td>
+                <td v-if="i.prioridad === 'N'"><span class="tag is-info">Normal</span></td>
+                <td v-else-if="i.prioridad === 'I'"><span class="tag is-warning">Importante</span></td>
+                <td v-else="i.prioridad === 'M'"><span class="tag is-danger">Importante</span></td>
+                <td><button @click="EliminarIdea(i.id)"class="button is-danger">Eliminar</button></td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </section>
+   
+
+    </div>
+    
+    
+    <script type="text/javascript" src="vue.js"></script>
+    <script type="text/javascript" src="axios.min.js"></script>
+    <script type="text/javascript" src="ideas.js"></script>
+</body>
+</html>
